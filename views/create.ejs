@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Budget Helper</title>
+    <script type="text/javascript" src="js/create.js"></script>
+    <script type="text/javascript" src="js/global.js"></script>
+    <link rel="stylesheet" href="css/create.css">
+    <link rel="stylesheet" href="css/global.css">
+</head>
+<body>    
+    <div class="parent">
+        <div class="container">
+            <%- include ("./include/nav") %>
+        </div>
+        <div class="container">
+            <div class="container-child" id="form">
+                <h3>Create a Budget</h3>
+                <form id="budget-form">
+                    <div class="income">
+                        <h3 class="heading">Income</h3>
+                        <table id="income-table" class="hidden">
+                            <tr>
+                                <th>Name</th>
+                                <th>Income</th>
+                                <th colspan="3">Frequency</th>
+                            </tr>
+                        </table>
+                        <ul>
+                            <li>
+                                <label for="income-type">Income Name</label>
+                                <input type="text" id="income-type" name="income-type"/>
+                            </li>
+                            <li>
+                                <label for="income-frequency">Income Frequency</label>
+                                <select name="income-frequency" id="income-frequency">
+                                    <option value="">Please select an option</option>
+                                    <option value="Weekly">Weekly</option>
+                                    <option value="Monthly">Monthly</option>
+                                </select>
+                            </li>
+                            <li>
+                                <label for="income-cost">Income</label>
+                                <input type="text" id="income-cost" name="income-cost">
+                            </li>
+                            <li>
+                                <button id="add-income" type="button">Add Income</button>
+                                <button id="edit-income" type="button" class="edit-button">Save</button> 
+                            </li>
+                        </ul>                
+                    </div>
+                    <div class="expense">
+                        <h3 class="heading">Expenses</h3>
+                        <table id="expense-table" class="hidden">
+                            <tr>
+                                <th>Expense</th>
+                                <th>Cost</th>
+                                <th colspan="3">Frequency</th>
+                            </tr>
+                        </table>
+                        <ul>
+                            <li>
+                                <label for="expense-type">Expense Type</label>
+                                <select name="expense-type" id="expense-type" onchange="showHidden('hidden-expense',this,'custom')">
+                                    <option value="">Please select an option</option>
+                                    <option value="Food">Food</option>
+                                    <option value="Clothing">Clothing</option>
+                                    <option value="Transportation">Transportation</option>
+                                    <option value="Housing">Housing</option>
+                                    <option value="Utilities">Utilities</option>
+                                    <option value="Medical">Medical</option>
+                                    <option value="Personal">Personal</option>
+                                    <option value="custom">Custom</option>
+                                </select>
+                                <div class="hidden" id="hidden-expense">
+                                    <label for="expense-custom">Custom Goal Type</label>
+                                    <input type="text" name="expense-custom" id="expense-custom" />
+                                </div>
+                            </li>
+                            <li>
+                                <label for="expense-frequency">Expense Frequency</label>
+                                <select name="expense-frequency" id="expense-frequency">
+                                    <option value="">Please select an option</option>
+                                    <option value="Weekly">Weekly</option>
+                                    <option value="Monthly">Monthly</option>
+                                </select>
+                            </li>
+                            <li>
+                                <label for="expense-cost">Cost</label>
+                                <input type="text" id="expense-cost" name="expense-cost" />
+                            </li>
+                            <li>
+                                <button id="add-expense" type="button">Add Expense</button>
+                                <button id="edit-expense" type="button" class="edit-button">Save</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="savings">
+                        <h3 class="heading">Savings</h3>
+                        <table id="savings-table" class="hidden">
+                            <tr>
+                                <th>Goal</th>
+                                <th>Amount</th>
+                                <th colspan="3">Date</th>
+                            </tr>
+                        </table>
+                        <ul>
+                            <li>
+                                <label for="savings-type">Savings Type</label>
+                                <select name="savings-type" id="savings-type" onchange="showHidden('hidden-savings',this,'custom')">
+                                    <option value="">Please select an option</option>
+                                    <option value="Emergency">Emergency</option>
+                                    <option value="custom">Custom</option>
+                                </select>
+                                <div class="hidden" id="hidden-savings">
+                                    <label for="savings-custom">Custom Goal Type</label>
+                                    <input type="text" name="savings-custom" id="savings-custom" />
+                                </div>
+                            </li>
+                            <li>
+                                <label for="savings-frequency">Goal Date</label>
+                                <input type="month" id="savings-frequency" name="savings-frequency">
+                                <script>
+                                    var today = new Date();
+                                    var mm = today.getMonth()+1;
+                                    var yyyy = today.getFullYear();
+                                    if(mm<10){
+                                        mm='0'+mm
+                                    }
+                                    today = yyyy+'-'+mm;
+                                    document.getElementById("savings-frequency").setAttribute("min", today);
+                                </script>
+                            </li>
+                            <li>
+                                <label for="savings-cost">Goal Amount</label>
+                                <input type="text" name="savings-cost" id="savings-cost" />
+                            </li>
+                            <li>
+                                <button id="add-savings" type="button">Add Goal</button>
+                                <button id="edit-savings" type="button" class="edit-button">Save</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="bottom-btn">
+                        <div id="error-msg">
+                            <p></p>
+                        </div>
+                        <ul>
+                            <li><button id="submit" type="button">Save Budget</button></li>
+                            <li><a href="/"><button id="cancel" type="button">Cancel</button></a></li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <div class="container-child" id="overview">
+                <h3>Budget Overview</h3>
+                <div id="income-overview">
+                    <label>Income: $<span></span></label>
+                    <button type="button" onclick="toggleHidden(this, 'income-details')">+</button>
+                    <div id="income-details" class="hidden">
+                        <table id="income-overview-table" class="hidden">
+                            <tr>
+                                <th>Name</th>
+                                <th>Monthly Income</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="expense-overview">
+                    <label>Expenses: $<span></span></label>
+                    <button type="button" onclick="toggleHidden(this, 'expense-details')">+</button>
+                    <div class="hidden" id="expense-details">
+                        <table id="expense-overview-table" class="hidden">
+                            <tr>
+                                <th>Name</th>
+                                <th>Monthly Expense</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="savings-overview">
+                    <label>Savings: $<span></span></label>
+                    <button type="button" onclick="toggleHidden(this, 'savings-details')">+</button>
+                    <div class="hidden" id="savings-details">
+                        <table id="savings-overview-table" class="hidden">
+                            <th>Name</th>
+                            <th>Months</th>
+                            <th>Monthly Payment</th>
+                        </table>
+                    </div>
+                </div>
+                <div id="balance">
+                    <p>Net Monthly Balance: $<span></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

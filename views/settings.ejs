@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Budget Helper</title>
+    <script type="text/javascript" src="js/global.js"></script>
+    <link rel="stylesheet" href="css/global.css">
+</head>
+<div class="parent">
+    <div class="container">
+        <%- include ("./include/nav") %>
+    </div>
+    <div class="container">
+        <div class="container-child">
+            <h3>Account Settings</h3>
+            <button onclick="toggleHide('change-pass')">Change Password</button>
+            <div id="change-pass" class="hidden">
+                <form action="/change-pass" method="POST">
+                    <input name="password" type="text">
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+            <br><br>
+            <form action="/delete-budget" method="POST">
+                <button type="submit">Delete Budget</button>
+            </form>
+            <br><br>
+            <form action="/delete-account" method="POST">
+                <button type="submit">Delete Account</button>
+            </form>
+        </div>    
+    </div>
+</div>
+</html>

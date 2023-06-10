@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Budget Helper</title>
+    <script type="text/javascript" src="js/global.js"></script>
+    <script type="text/javascript" src="js/transactions.js"></script>
+    <link rel="stylesheet" href="css/global.css">
+</head>
+<div class="parent">
+    <div class="container">
+        <%- include ("./include/nav") %>
+    </div>
+    <div class="container">
+        <div class="container-child">
+            <h3>Recent Transactions</h3>
+            <table id="trans-table">
+                <tr>
+                    <th>Trans. ID</th>
+                    <th>Date</th>
+                    <th>Vendor</th>
+                    <th>Amount</th>
+                    <th>Budget</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </tr>
+            <%
+            if(transData.length!=0){
+                var i=1;
+                transData.forEach(function(data){
+            %>
+                    <tr>
+                        <td><%=data.trans_id %></td>
+                        <td><%=data.date %></td>
+                        <td><%=data.vendor %></td>
+                        <td>$<span id="amnt"><%=data.amount %></span></td>
+                        <td><%=data.budget %></td>
+                        <td><button onclick="edit(this)">Edit</button></td>
+                        <td><a href="/delete-transaction/<%=data.trans_id%>">Delete</a></td>
+                    </tr>
+                <%  }) %>
+            <% } else{ %>
+                <tr>
+                    <td colspan="7">No Data Found</td>
+                </tr>
+            <% } %>   
+            </table>
+            <div>
+                <form id="add-form" action="/add-transaction" method="POST">
+                    <label for="date">Date</label>
+                    <input type="date" name="date" required>
+                    <br>
+                    <label for="vendor">Vendor</label>
+                    <input type="text" name="vendor" required>
+                    <br>
+                    <label for="amount">Amount $</label>
+                    <input type="text" name="amount" required>
+                    <br>
+                    <label for="budget">Budget</label>
+                    <select name="budget" id="budget-dropdown" required>
+                        <option value="">Please select an option</option>
+                    </select>
+                    <br>
+                    <button type="submit">Add Transaction</button>
+                </form>
+                <form id="edit-form" action="/update-transaction" method="POST" class="hidden">
+                    <label for="trans_id">Trans. ID</label>
+                    <input id="trans_id" name="trans_id" type="text" readonly>
+                    <br>
+                    <label for="date">Date</label>
+                    <input id="date" type="date" name="date" required>
+                    <br>
+                    <label for="vendor">Vendor</label>
+                    <input id="vender" type="text" name="vendor" required>
+                    <br>
+                    <label for="amount">Amount $</label>
+                    <input id="amount" type="text" name="amount" required>
+                    <br>
+                    <label for="budget">Budget</label>
+                    <select name="budget" id="update-budget-dropdown" required>
+                        <option value="">Please select an option</option>
+                    </select>
+                    <br>
+                    <button type="submit">Save Transaction</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

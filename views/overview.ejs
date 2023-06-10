@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Budget Helper</title>
+    <script type="text/javascript" src="js/overview.js"></script>
+    <script type="text/javascript" src="js/global.js"></script>
+    <link rel="stylesheet" href="css/overview.css">
+    <link rel="stylesheet" href="css/global.css">
+</head>
+<body>
+    <div class="parent">
+        <div class="container">
+            <%- include ("./include/nav") %>
+        </div>
+        <div class="container">
+            <div class="container-child" id="create">
+                <a href="create"><button>Create a budget</button></a>
+            </div>
+            <div class="container-child hidden" id="overview">
+                <h3>Monthly Budget Overview</h3>
+                <div id="overview-data">
+                    <ul id="overview-list"></ul>
+                </div>
+                <div>
+                    <a href="create"><button>Edit Budget</button></a>
+                </div>
+            </div>
+            <div class="container-child hidden" id="recent-transactions">
+                <h3>Recent Transactions</h3>
+                <table>
+                    <tr>
+                        <th>Trans. ID</th>
+                        <th>Date</th>
+                        <th>Vendor</th>
+                        <th>Amount</th>
+                        <th>Budget</th>
+                    </tr>
+                <% if(transData.length!=0){ %>
+                <%  var i = transData.length; %>
+                <%  if (i > 5) i = 5; %>
+                <%  for (var j = 0; j < i; j++){ %>
+                <%      let today = new Date(); %>
+                <%      let temp = new Date(transData[j].date); %>
+                <%      if (temp.getMonth() == today.getMonth()){ %>
+                        <tr>
+                            <td><%=transData[j].trans_id %></td>
+                            <td><%=transData[j].date %></td>
+                            <td><%=transData[j].vendor %></td>
+                            <td>$<span><%=transData[j].amount %></span></td>
+                            <td><%=transData[j].budget %></td>
+                        </tr>
+                    <% } %>
+                <%  } %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="6">No Data Found</td>
+                    </tr>
+                <% } %>   
+                </table>
+                <a href="/transactions"><button>More Details</button></a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

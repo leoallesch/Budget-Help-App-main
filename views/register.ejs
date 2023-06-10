@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Budget Helper</title>
+    <script type="text/javascript" src="js/register.js"></script>
+    <script type="text/javascript" src="js/global.js"></script>
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/message.css">
+</head>
+<body>
+    <div class="parent">
+        <div class="container">
+           <%- include ("./include/nav") %>
+        </div>
+        <div class="container-child" id="login">
+            <%- include ("./include/message") %>
+            <form action="/register" method="POST">
+                <div class="form-container">
+                    <label for="firstname">First Name</label>
+                    <input type="text" name="firstname" id="firstname" placeholder="First Name" required>
+                    <label for="lastname">Last Name</label>
+                    <input type="text" name="lastname" id="lastname" placeholder="Last Name" required>
+                    <label for="username">Email</label>
+                    <input type="text" name="email" id="email" placeholder="Enter Email" required>
+                    <label for="email">Username</label>
+                    <input type="text" name="username" id="username" placeholder="Enter Username" required>
+                    <label for="password">Password</label>
+                    <input type="text" name="password" id="password" placeholder="Enter Password" required>
+                    <label for="password">Confirm Password</label>
+                    <input type="text" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required>
+                    <button type="submit" id="register-button">Register</button>
+                </div>
+                <div class="form-container">
+                    <a href="/"><button type="button" class="cancel">Cancel</button></a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Budget Helper</title>
+    <script type="text/javascript" src="/js/login.js"></script>
+    <script type="text/javascript" src="/js/global.js"></script>
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/message.css">
+</head>
+<body>
+    <div class="parent">
+        <div class="container">
+            <%- include ("./include/nav") %>
+        </div>
+        <div class="container-child" id="login">
+            <%- include ("./include/message") %>
+            <form action="/login" method="POST">
+                <div class="form-container">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" placeholder="Enter Username" required>
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Enter Password" required>
+                    <button type="submit" id="login-button">Login</button>
+                </div>
+                <div class="form-container">
+                    <a href="/"><button type="button" class="cancel">Cancel</button></a>
+                    <a href="register"><button type="button">Register</button></a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

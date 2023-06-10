@@ -1,0 +1,54 @@
+﻿body {
+    margin: 0;
+}
+
+#form ul {
+    padding: 0;
+}
+
+#form li {
+    list-style-type: none;
+    padding: 2px;
+}
+
+.hidden {
+    display: none;
+}
+
+.edit-button {
+    display: none;
+}
+
+#error-msg p {
+    color: red;
+}
+
+#bottom-btn li {
+    list-style: none;
+    display: inline-block;
+    width: 49%;
+    height: 30px;
+    padding: 0;
+    margin: 0;
+}
+
+#bottom-btn button {
+    height: 100%;
+    width: 100%;
+}
+
+#income-overview span {
+    color: green;
+}
+
+#expense-overview span {
+    color: red;
+}
+
+#savings-overview span {
+    color: red;
+}
+
+#overview li {
+    list-style-type: none;
+}

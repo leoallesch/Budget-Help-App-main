@@ -1,0 +1,22 @@
+<div class="navbar">
+    <div class="dropdown" id="menu">
+        <a id="menu-btn" onclick="showDiv('menu-dropdown')">
+            <div class="menu-btn-lines"></div>
+            <div class="menu-btn-lines"></div>
+            <div class="menu-btn-lines"></div>
+        </a>
+        <div class="dropdown-content" id="menu-dropdown" onmouseleave="showDiv('menu-dropdown')">
+            <a href="/">Overview</a>
+            <a href="create">Budget</a>
+            <a href="transactions">Transactions</a>
+        </div>
+    </div>
+    <div class="navbar-right">
+        <% if (!loggedIn) { %>
+            <a href="login">Login</a>
+        <% } else { %>
+            <a href="logout">Logout</a>
+            <a href="settings">Settings</a>
+        <% } %>
+    </div> 
+</div>
